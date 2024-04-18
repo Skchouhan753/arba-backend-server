@@ -117,7 +117,7 @@ const loginController = async (req, res) => {
 const getUserProfileController = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await userModel.findById(req.user._id);
+    const user = await userModel.findOne({email});
     user.password = undefined;
     res.status(200).send({
       success: true,
