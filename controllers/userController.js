@@ -103,7 +103,9 @@ const loginController = async (req, res) => {
             success: true,
             message: "Login Successfully",
             token,
-            user,
+            user:{
+              email: user.email,
+            },
           });
       } else {
         res.status(400).json({ msg: "wrong password" });
