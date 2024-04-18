@@ -68,6 +68,7 @@ const loginController = async (req, res) => {
     // check user
     const user = await userModel.findOne({ email });
     //user valdiation
+    const { fullName, avatar } = user;
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -81,7 +82,7 @@ const loginController = async (req, res) => {
           { userID: user._id, userName: user.userName },
           SECRET_CODE,
           { expiresIn: "1h" }
-      );
+        );
 
         const updatedUser = await userModel.findOneAndUpdate(
           { email },
@@ -91,13 +92,13 @@ const loginController = async (req, res) => {
         if (!updatedUser) {
           return res.status(400).json({ msg: "Failed to update token" });
         }
-        res
-          .status(200).json({
-            success: true,
-            message: "Login Successfully",
-            token,
-            user
-          });
+        res.status(200).json({
+          success: true,
+          message: "Login Successfully",
+          token,
+          fullName,
+          avatar,
+        });
       } else {
         res.status(400).json({ msg: "wrong password" });
       }
@@ -283,14 +284,14 @@ const passwordResetController = async (req, res) => {
     // user get email || newPassword || answer
     const { email, newPassword } = req.body;
     // valdiation
-    if (!newPassword ) {
+    if (!newPassword) {
       return res.status(500).json({
         success: false,
         message: "Please Provide Password",
       });
     }
     // find user
-    const user = await userModel.findOne({ email});
+    const user = await userModel.findOne({ email });
     //valdiation
     if (!user) {
       return res.status(404).json({
