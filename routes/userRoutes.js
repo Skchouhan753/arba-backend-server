@@ -10,7 +10,7 @@ const {
   updateProfileController,
 } = require("../controllers/userController.js");
 
-const { singleUpload } = require("../middlewares/multer.js");
+
 
 //router object
 const userRuter = express.Router();
@@ -23,7 +23,7 @@ userRuter.post("/register", registerController);
 userRuter.post("/login", loginController);
 
 //profile
-// userRuter.get("/profile", auth, getUserProfileController);
+userRuter.get("/profile",  getUserProfileController);
 
 //logout
 userRuter.get("/logout", logoutController);
