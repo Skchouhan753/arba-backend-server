@@ -104,7 +104,9 @@ const loginController = async (req, res) => {
             message: "Login Successfully",
             token,
             user:{
+              _id: user._id,
               email: user.email,
+              username: user.userName
             },
           });
       } else {
