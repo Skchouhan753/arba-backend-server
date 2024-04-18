@@ -78,10 +78,10 @@ const loginController = async (req, res) => {
     bcrypt.compare(password, user.password, async (err, result) => {
       if (result) {
         const token = jwt.sign(
-          { userID: user._id, username: user.username },
+          { userID: user._id, userName: user.userName },
           SECRET_CODE,
           { expiresIn: "1h" }
-        );
+      );
 
         const updatedUser = await userModel.findOneAndUpdate(
           { email },
@@ -103,11 +103,7 @@ const loginController = async (req, res) => {
             success: true,
             message: "Login Successfully",
             token,
-            user:{
-              _id: user._id,
-              email: user.email,
-              username: user.userName
-            },
+            user
           });
       } else {
         res.status(400).json({ msg: "wrong password" });
