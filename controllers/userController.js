@@ -93,12 +93,12 @@ const loginController = async (req, res) => {
         }
         res
           .status(200)
-          .cookie("token", token, {
-            expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-            // secure: process.env.NODE_ENV === "development" ? true : false,
-            // httpOnly: process.env.NODE_ENV === "development" ? true : false,
-            // sameSite: process.env.NODE_ENV === "development" ? true : false,
-          })
+          // .cookie("token", token, {
+          //   expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+          //   // secure: process.env.NODE_ENV === "development" ? true : false,
+          //   // httpOnly: process.env.NODE_ENV === "development" ? true : false,
+          //   // sameSite: process.env.NODE_ENV === "development" ? true : false,
+          // })
           .json({
             success: true,
             message: "Login Successfully",
