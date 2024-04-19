@@ -10,8 +10,6 @@ const {
   updateProfileController,
 } = require("../controllers/userController.js");
 
-
-
 //router object
 const userRuter = express.Router();
 
@@ -23,17 +21,16 @@ userRuter.post("/register", registerController);
 userRuter.post("/login", loginController);
 
 //profile
-userRuter.get("/profile",  getUserProfileController);
+userRuter.get("/profile:id", auth, getUserProfileController);
 
 //logout
 userRuter.get("/logout", logoutController);
 
-
 // updte password
-userRuter.patch("/update-password", udpatePasswordController);
+userRuter.patch("/update-password", auth, udpatePasswordController);
 
 // uopdate profile
-userRuter.patch("/profile-update", updateProfileController);
+userRuter.patch("/profile-update", auth, updateProfileController);
 
 // FORGOT PASSWORD
 userRuter.patch("/reset-password", passwordResetController);

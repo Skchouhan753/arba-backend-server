@@ -68,7 +68,7 @@ const loginController = async (req, res) => {
     // check user
     const user = await userModel.findOne({ email });
     //user valdiation
-    const { fullName, avatar } = user;
+    const { fullName, avatar, _id} = user;
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -92,12 +92,13 @@ const loginController = async (req, res) => {
         if (!updatedUser) {
           return res.status(400).json({ msg: "Failed to update token" });
         }
-        res.status(200).json({
+        res.status(200).send({
           success: true,
           message: "Login Successfully",
           token,
           fullName,
           avatar,
+          _id,
         });
       } else {
         res.status(400).json({ msg: "wrong password" });
